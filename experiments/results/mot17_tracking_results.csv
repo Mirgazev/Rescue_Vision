@@ -1,0 +1,2 @@
+model,dataset,mode,idf1,mota,notes
+YOLO11-pose-v4,MOT17,OFF,0.74,0.77,best tracking result

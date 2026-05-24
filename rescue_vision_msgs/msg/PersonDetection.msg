@@ -1,17 +1,11 @@
-# Person detection result for rescue vision subsystem
-
 std_msgs/Header header
-
 int32 track_id
 float32 confidence
-
 float32 bbox_center_x
 float32 bbox_center_y
 float32 bbox_width
 float32 bbox_height
-
 float32[] keypoints_x
 float32[] keypoints_y
 float32[] keypoints_confidence
-
 string scene_mode

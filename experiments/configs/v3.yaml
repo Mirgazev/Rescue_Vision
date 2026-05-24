@@ -1,0 +1,2 @@
+experiment: yolo11_pose_v3
+notes: rejected due to distribution mismatch with aggressive enhancement during training

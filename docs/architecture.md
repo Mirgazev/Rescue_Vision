@@ -1,14 +1,6 @@
 # Architecture
 
-Rescue Vision is a computer vision subsystem for a mobile rescue robot operating in degraded visibility conditions.
+Rescue Vision is a six-stage computer vision pipeline for rescue robotics:
+frame acquisition, scene analysis, mode classification, adaptive enhancement, YOLO11-pose detection, ByteTrack tracking and ROS2 publication.
 
-The pipeline consists of six main stages:
-
-1. Frame acquisition
-2. Scene analysis
-3. Visibility mode classification
-4. Adaptive image enhancement
-5. Human detection with YOLO11-pose
-6. Tracking and ROS2 publication
-
-The subsystem does not control robot locomotion directly. It publishes perception results that can be used by higher-level navigation and operator interfaces.
+The perception subsystem is separated from the low-level Unitree H1 locomotion controller and does not publish joint commands or emergency control commands.

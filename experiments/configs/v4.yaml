@@ -1,25 +1,14 @@
 experiment: yolo11_pose_v4
 description: Final conservative configuration for rescue vision subsystem
-
 model:
   base: yolo11-pose
   task: pose
   input_size: 768
-
 training:
   mosaic: 0.0
   mixup: 0.0
   freeze_layers: true
   enhancement_probability: reduced
-
-datasets:
-  - ExDark
-  - RESIDE
-  - COCO val2017
-  - MOT17
-  - SmokeTest
-  - MCHS manual GT
-
 results:
   exdark_map50: 0.8905
   auto_classifier_accuracy: 0.905

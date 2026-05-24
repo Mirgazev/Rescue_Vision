@@ -5,52 +5,30 @@
 *.engine
 weights/
 
-# Datasets and large archives
+# Datasets and large files
 data/
 datasets/
+bags/
 *.zip
 *.tar.gz
 *.rar
-
-# Video files
 *.mp4
 *.avi
 *.mov
 *.mkv
 *.webm
 
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
 *.egg-info/
 .pytest_cache/
-
-# Virtual environments
-env/
-venv/
 .venv/
-ENV/
+venv/
+env/
 
-# Build artifacts
+# ROS2
 build/
-dist/
-downloads/
-.eggs/
-*.egg
-
-# Jupyter
-.ipynb_checkpoints/
-
-# IDE and OS files
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-
-# ROS2 workspace artifacts
 install/
 log/
 .colcon/
@@ -61,9 +39,12 @@ debug_images/
 runs/
 *.log
 
-# Private and secret files
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets
+.env
 private/
 secrets/
-.env
-*.key
-*.pem

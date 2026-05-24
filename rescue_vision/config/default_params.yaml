@@ -1,0 +1,8 @@
+rescue_vision_node:
+  ros__parameters:
+    model_path: weights/yolo11_pose_v4.pt
+    enhance_mode: auto
+    imgsz: 768
+    conf_threshold: 0.25
+    device: cuda
+    input_topic: /camera/color/image_raw
