@@ -5,13 +5,14 @@
 *.engine
 weights/
 
-# Datasets and large files
+# Datasets and large archives
 data/
 datasets/
-bags/
 *.zip
 *.tar.gz
 *.rar
+
+# Video files
 *.mp4
 *.avi
 *.mov
