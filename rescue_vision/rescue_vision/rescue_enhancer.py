@@ -17,7 +17,11 @@ def create_gamma_lut(gamma: float) -> np.ndarray:
 class RescueEnhancer:
     """Adaptive image enhancement module for rescue vision scenes."""
 
-    def __init__(self, mode: EnhancementMode = EnhancementMode.AUTO, scene_analyzer: Optional[SceneAnalyzer] = None):
+    def __init__(
+        self,
+        mode: EnhancementMode = EnhancementMode.AUTO,
+        scene_analyzer: Optional[SceneAnalyzer] = None,
+    ):
         self.current_mode = mode
         self.scene_analyzer = scene_analyzer or SceneAnalyzer()
         self.enhance_time_ms = 0.0
@@ -65,7 +69,9 @@ class RescueEnhancer:
     def _enhance_fog(self, frame: np.ndarray) -> np.ndarray:
         """Dark Channel Prior on a downsampled frame."""
         h, w = frame.shape[:2]
-        small = cv2.resize(frame, (max(1, w // 2), max(1, h // 2)), interpolation=cv2.INTER_LINEAR)
+        small = cv2.resize(
+            frame, (max(1, w // 2), max(1, h // 2)), interpolation=cv2.INTER_LINEAR
+        )
         patch_size = 7
         min_channel = np.min(small, axis=2)
         kernel = np.ones((patch_size, patch_size), np.uint8)
@@ -78,7 +84,9 @@ class RescueEnhancer:
         omega = 0.85
         transmission = 1.0 - omega * (dark_channel.astype(np.float32) / atmospheric)
         transmission = np.clip(transmission, 0.15, 1.0)
-        transmission_full = cv2.resize(transmission, (w, h), interpolation=cv2.INTER_LINEAR)
+        transmission_full = cv2.resize(
+            transmission, (w, h), interpolation=cv2.INTER_LINEAR
+        )
         t_3ch = np.stack([transmission_full] * 3, axis=2)
         recovered = (frame.astype(np.float32) - atmospheric) / t_3ch + atmospheric
         result = np.clip(recovered, 0, 255).astype(np.uint8)
@@ -90,7 +98,9 @@ class RescueEnhancer:
     def _enhance_smoke(self, frame: np.ndarray) -> np.ndarray:
         """Single-Scale Retinex with illumination estimation on a 4x smaller image."""
         h, w = frame.shape[:2]
-        small = cv2.resize(frame, (max(1, w // 4), max(1, h // 4)), interpolation=cv2.INTER_AREA)
+        small = cv2.resize(
+            frame, (max(1, w // 4), max(1, h // 4)), interpolation=cv2.INTER_AREA
+        )
         img = small.astype(np.float32) + 1.0
         illumination = cv2.GaussianBlur(img, (0, 0), sigmaX=30, sigmaY=30) + 1.0
         retinex = np.log(img) - np.log(illumination)

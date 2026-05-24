@@ -24,43 +24,70 @@ class RescueVisionNode(Node):
     """ROS2 integration node for adaptive enhancement, YOLO11-pose and ByteTrack."""
 
     def __init__(self):
-        super().__init__('rescue_vision_node')
+        super().__init__("rescue_vision_node")
         self.cb_group = MutuallyExclusiveCallbackGroup()
         self.bridge = CvBridge()
 
-        self.declare_parameter('model_path', 'weights/yolo11_pose_v4.pt')
-        self.declare_parameter('enhance_mode', 'auto')
-        self.declare_parameter('imgsz', 768)
-        self.declare_parameter('conf_threshold', 0.25)
-        self.declare_parameter('device', 'cuda')
-        self.declare_parameter('input_topic', '/camera/color/image_raw')
+        self.declare_parameter("model_path", "weights/yolo11_pose_v4.pt")
+        self.declare_parameter("enhance_mode", "auto")
+        self.declare_parameter("imgsz", 768)
+        self.declare_parameter("conf_threshold", 0.25)
+        self.declare_parameter("device", "cuda")
+        self.declare_parameter("input_topic", "/camera/color/image_raw")
 
         self.scene_analyzer = SceneAnalyzer()
-        self.enhancer = RescueEnhancer(EnhancementMode.from_string(self.get_parameter('enhance_mode').value), self.scene_analyzer)
+        self.enhancer = RescueEnhancer(
+            EnhancementMode.from_string(self.get_parameter("enhance_mode").value),
+            self.scene_analyzer,
+        )
         self.detector = BaseDetector(
-            self.get_parameter('model_path').value,
-            imgsz=int(self.get_parameter('imgsz').value),
-            conf=float(self.get_parameter('conf_threshold').value),
-            device=self.get_parameter('device').value,
+            self.get_parameter("model_path").value,
+            imgsz=int(self.get_parameter("imgsz").value),
+            conf=float(self.get_parameter("conf_threshold").value),
+            device=self.get_parameter("device").value,
         )
 
-        sensor_qos = QoSProfile(depth=3, reliability=ReliabilityPolicy.BEST_EFFORT, history=HistoryPolicy.KEEP_LAST)
-        reliable_qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, history=HistoryPolicy.KEEP_LAST)
-        transient_qos = QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        sensor_qos = QoSProfile(
+            depth=3,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            history=HistoryPolicy.KEEP_LAST,
+        )
+        reliable_qos = QoSProfile(
+            depth=10,
+            reliability=ReliabilityPolicy.RELIABLE,
+            history=HistoryPolicy.KEEP_LAST,
+        )
+        transient_qos = QoSProfile(
+            depth=1,
+            reliability=ReliabilityPolicy.RELIABLE,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL,
+        )
 
-        self.sub = self.create_subscription(Image, self.get_parameter('input_topic').value, self.image_callback, sensor_qos, callback_group=self.cb_group)
-        self.scene_pub = self.create_publisher(SceneMode, '/scene/mode', transient_qos)
-        self.detection_pub = self.create_publisher(PersonDetection, '/detection/persons', reliable_qos)
-        self.debug_image_pub = self.create_publisher(Image, '/vision/debug/image', sensor_qos)
-        self.performance_pub = self.create_publisher(Float32, '/vision/performance/fps', reliable_qos)
-        self.status_pub = self.create_publisher(String, '/vision/status', transient_qos)
+        self.sub = self.create_subscription(
+            Image,
+            self.get_parameter("input_topic").value,
+            self.image_callback,
+            sensor_qos,
+            callback_group=self.cb_group,
+        )
+        self.scene_pub = self.create_publisher(SceneMode, "/scene/mode", transient_qos)
+        self.detection_pub = self.create_publisher(
+            PersonDetection, "/detection/persons", reliable_qos
+        )
+        self.debug_image_pub = self.create_publisher(
+            Image, "/vision/debug/image", sensor_qos
+        )
+        self.performance_pub = self.create_publisher(
+            Float32, "/vision/performance/fps", reliable_qos
+        )
+        self.status_pub = self.create_publisher(String, "/vision/status", transient_qos)
 
         self.frame_count = 0
         self.last_time = time.time()
-        self.get_logger().info('rescue_vision_node started')
+        self.get_logger().info("rescue_vision_node started")
 
     def image_callback(self, msg):
-        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
+        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
         mode = self.scene_analyzer.analyze(frame)
         enhanced = self.enhancer.enhance(frame)
         result = self.detector.process_frame(enhanced)
@@ -74,7 +101,7 @@ class RescueVisionNode(Node):
                 setattr(scene_msg, key, float(value))
         self.scene_pub.publish(scene_msg)
 
-        for det in result['detections']:
+        for det in result["detections"]:
             det_msg = PersonDetection()
             det_msg.header = msg.header
             det_msg.track_id = int(det.track_id)
@@ -100,12 +127,14 @@ class RescueVisionNode(Node):
             self.frame_count = 0
             self.last_time = now
 
-        self.debug_image_pub.publish(self.bridge.cv2_to_imgmsg(enhanced, encoding='bgr8'))
+        self.debug_image_pub.publish(
+            self.bridge.cv2_to_imgmsg(enhanced, encoding="bgr8")
+        )
 
 
 def main(args=None):
     if rclpy is None:
-        raise RuntimeError('ROS2 rclpy is not available in this environment')
+        raise RuntimeError("ROS2 rclpy is not available in this environment")
     rclpy.init(args=args)
     node = RescueVisionNode()
     try:
@@ -115,5 +144,5 @@ def main(args=None):
         rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

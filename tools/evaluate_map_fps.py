@@ -2,6 +2,7 @@
 
 Full datasets and trained weights are intentionally not included in the public repository.
 """
+
 import argparse
 import time
 import cv2
@@ -10,9 +11,9 @@ from rescue_vision.rescue_vision.enhancement_modes import EnhancementMode
 from rescue_vision.rescue_vision.rescue_enhancer import RescueEnhancer
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--video', required=True)
-parser.add_argument('--model', default='weights/yolo11_pose_v4.pt')
-parser.add_argument('--enhance', default='off')
+parser.add_argument("--video", required=True)
+parser.add_argument("--model", default="weights/yolo11_pose_v4.pt")
+parser.add_argument("--enhance", default="off")
 args = parser.parse_args()
 
 cap = cv2.VideoCapture(args.video)
@@ -28,4 +29,4 @@ while True:
     detector.process_frame(processed)
     frames += 1
 elapsed = max(time.time() - start, 1e-6)
-print({'frames': frames, 'fps': frames / elapsed})
+print({"frames": frames, "fps": frames / elapsed})

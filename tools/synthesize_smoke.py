@@ -3,9 +3,9 @@ import cv2
 import numpy as np
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input', required=True)
-parser.add_argument('--output', required=True)
-parser.add_argument('--alpha', type=float, default=0.35)
+parser.add_argument("--input", required=True)
+parser.add_argument("--output", required=True)
+parser.add_argument("--alpha", type=float, default=0.35)
 args = parser.parse_args()
 
 img = cv2.imread(args.input)

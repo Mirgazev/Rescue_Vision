@@ -23,7 +23,9 @@ class SceneAnalyzer:
         rain_diagonal_ratio_min=1.3,
     )
 
-    def __init__(self, thresholds: Optional[dict] = None, manifest_path: Optional[str] = None):
+    def __init__(
+        self, thresholds: Optional[dict] = None, manifest_path: Optional[str] = None
+    ):
         if thresholds is not None:
             self.thresholds = thresholds
         elif manifest_path:
@@ -38,10 +40,10 @@ class SceneAnalyzer:
         self.last_smoothed_mode = EnhancementMode.OFF
 
     def _load_from_manifest(self, manifest_path: str) -> dict:
-        with open(manifest_path, 'r', encoding='utf-8') as file:
+        with open(manifest_path, "r", encoding="utf-8") as file:
             data = yaml.safe_load(file) or {}
         thresholds = self.DEFAULT_THRESHOLDS.copy()
-        thresholds.update(data.get('thresholds', data))
+        thresholds.update(data.get("thresholds", data))
         return thresholds
 
     def get_features(self, frame: np.ndarray) -> Dict[str, float]:
@@ -55,43 +57,43 @@ class SceneAnalyzer:
         laplac_var = float(cv2.Laplacian(gray, cv2.CV_64F).var())
         sobelx = cv2.Sobel(gray, cv2.CV_32F, 1, 0, ksize=3)
         sobely = cv2.Sobel(gray, cv2.CV_32F, 0, 1, ksize=3)
-        mag = np.sqrt(sobelx ** 2 + sobely ** 2)
+        mag = np.sqrt(sobelx**2 + sobely**2)
         edge_density = float(np.mean(mag > 50))
         diag_ratio = float(np.sum(np.abs(sobely)) / (np.sum(np.abs(sobelx)) + 1e-6))
 
         return {
-            'brightness': brightness,
-            'std': std,
-            'laplac_var': laplac_var,
-            'hist_peak_bin': int(np.argmax(hist)),
-            'edge_density': edge_density,
-            'diag_ratio': diag_ratio,
+            "brightness": brightness,
+            "std": std,
+            "laplac_var": laplac_var,
+            "hist_peak_bin": int(np.argmax(hist)),
+            "edge_density": edge_density,
+            "diag_ratio": diag_ratio,
         }
 
     def _classify_from_features(self, f: Dict[str, float]) -> EnhancementMode:
         """Decision tree: NIGHT > FOG > SMOKE > RAIN > OFF."""
         t = self.thresholds
-        if f['brightness'] < t['night_brightness']:
+        if f["brightness"] < t["night_brightness"]:
             return EnhancementMode.NIGHT
 
         if (
-            f['brightness'] > t['fog_brightness_min']
-            and f['std'] < t['fog_std_max']
-            and f['laplac_var'] < t['fog_laplac_max']
+            f["brightness"] > t["fog_brightness_min"]
+            and f["std"] < t["fog_std_max"]
+            and f["laplac_var"] < t["fog_laplac_max"]
         ):
             return EnhancementMode.FOG
 
-        sb_min, sb_max = t['smoke_brightness_range']
+        sb_min, sb_max = t["smoke_brightness_range"]
         if (
-            sb_min < f['brightness'] < sb_max
-            and f['std'] < t['smoke_std_max']
-            and f['laplac_var'] < t['smoke_laplac_max']
+            sb_min < f["brightness"] < sb_max
+            and f["std"] < t["smoke_std_max"]
+            and f["laplac_var"] < t["smoke_laplac_max"]
         ):
             return EnhancementMode.SMOKE
 
         if (
-            f['edge_density'] > t['rain_edge_density_min']
-            and f['diag_ratio'] > t['rain_diagonal_ratio_min']
+            f["edge_density"] > t["rain_edge_density_min"]
+            and f["diag_ratio"] > t["rain_diagonal_ratio_min"]
         ):
             return EnhancementMode.RAIN
 

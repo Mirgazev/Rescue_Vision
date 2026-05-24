@@ -14,19 +14,21 @@ class OperatorVisualizationNode(Node):
     """Simple operator display node for debug images."""
 
     def __init__(self):
-        super().__init__('operator_visualization_node')
+        super().__init__("operator_visualization_node")
         self.bridge = CvBridge()
-        self.sub = self.create_subscription(Image, '/vision/debug/image', self.callback, 10)
+        self.sub = self.create_subscription(
+            Image, "/vision/debug/image", self.callback, 10
+        )
 
     def callback(self, msg):
-        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        cv2.imshow('Rescue Vision Operator View', frame)
+        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+        cv2.imshow("Rescue Vision Operator View", frame)
         cv2.waitKey(1)
 
 
 def main(args=None):
     if rclpy is None:
-        raise RuntimeError('ROS2 rclpy is not available')
+        raise RuntimeError("ROS2 rclpy is not available")
     rclpy.init(args=args)
     node = OperatorVisualizationNode()
     try:

@@ -5,9 +5,9 @@ from rescue_vision.rescue_vision.enhancement_modes import EnhancementMode
 from rescue_vision.rescue_vision.rescue_enhancer import RescueEnhancer
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input', required=True)
-parser.add_argument('--enhance', default='auto')
-parser.add_argument('--output', required=True)
+parser.add_argument("--input", required=True)
+parser.add_argument("--enhance", default="auto")
+parser.add_argument("--output", required=True)
 args = parser.parse_args()
 
 frame = cv2.imread(args.input)
