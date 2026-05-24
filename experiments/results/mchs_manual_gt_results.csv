@@ -1,0 +1,3 @@
+model,dataset,mode,map50,notes
+YOLO11-pose-v4,MCHS manual GT,OFF,0.82,best result on clean rescue scene
+YOLO11-pose-v4,MCHS manual GT,AUTO,0.79,conservative automatic mode

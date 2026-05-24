@@ -1,70 +1,69 @@
-# Веса нейросетевых моделей — слишком большие для GitHub
+# Neural network weights
 *.pt
 *.pth
 *.onnx
 *.engine
 weights/
 
-# Датасеты — слишком большие
+# Datasets and large archives
 data/
 datasets/
 *.zip
 *.tar.gz
+*.rar
 
-# Видеофайлы
+# Video files
 *.mp4
 *.avi
 *.mov
 *.mkv
+*.webm
 
-# Python
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-.Python
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
 env/
 venv/
 .venv/
 ENV/
+
+# Build artifacts
 build/
-develop-eggs/
 dist/
 downloads/
-eggs/
 .eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
 *.egg
 
 # Jupyter
-.ipynb_checkpoints
+.ipynb_checkpoints/
 
-# IDE
+# IDE and OS files
 .vscode/
 .idea/
 *.swp
 *.swo
 .DS_Store
 
-# ROS2
-build/
+# ROS2 workspace artifacts
 install/
 log/
 .colcon/
 
-# Отладка
+# Debug output
 debug_output/
 debug_images/
+runs/
 *.log
 
-# Личное
+# Private and secret files
 private/
 secrets/
 .env
-
+*.key
+*.pem
