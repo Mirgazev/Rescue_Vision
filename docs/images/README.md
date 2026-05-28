@@ -15,25 +15,6 @@ docs/images/
 └── mchs_detections.png             кадр из видео МЧС с детекциями + track-ID
 ```
 
-## Указание для пользователя репозитория
-
-Перед публикацией репозитория необходимо добавить сюда:
-
-* `architecture.png` — взять из ВКР Главы 3 (Рисунок 14);
-* `ros2_graph.png` — взять из ВКР Главы 3 (Рисунок 15);
-* `enhancement_demo_*.png` — сгенерировать через `tools/make_comparison.py`:
-
-```bash
-python3 tools/make_comparison.py \
-    --input path/to/exdark_sample.jpg \
-    --output docs/images/enhancement_demo_exdark.png \
-    --modes off night
-```
-
-* `mchs_detections.png` — взять кадр из обработанного видео МЧС с нарисованными bbox и track-ID.
-
-После добавления картинок раскомментировать ссылки на них в главном `README.md`.
-
 ## Требования к изображениям
 
 * Формат: PNG или JPG;
