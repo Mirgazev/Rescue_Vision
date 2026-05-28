@@ -1,0 +1,3 @@
+model,dataset,mode,map50,precision,recall,f1,fps,n_frames,gt_boxes
+v4,MOT17,OFF,0.6367,0.6138,0.6911,0.6502,62.0,5316,85828
+v4,MOT17,AUTO,0.6367,0.6138,0.6911,0.6502,23.6,5316,85828

@@ -1,51 +1,164 @@
-# Neural network weights
-*.pt
-*.pth
-*.onnx
-*.engine
-weights/
+# =====================================================================
+# rescue_vision_bachelor — .gitignore
+# =====================================================================
 
-# Datasets and large archives
-data/
-datasets/
-*.zip
-*.tar.gz
-*.rar
-
-# Video files
-*.mp4
-*.avi
-*.mov
-*.mkv
-*.webm
-
+# ---------------------------------------------------------------------
 # Python
+# ---------------------------------------------------------------------
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+*.egg
 *.egg-info/
-.pytest_cache/
+.eggs/
+build/
+dist/
+develop-eggs/
+.installed.cfg
+MANIFEST
+pip-wheel-metadata/
+share/python-wheels/
+.python-version
+
+# Виртуальные окружения
 .venv/
 venv/
 env/
+ENV/
+.env
 
-# ROS2
+# Pytest / coverage
+.pytest_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# mypy / ruff
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+
+# ---------------------------------------------------------------------
+# ROS 2 colcon / ament
+# ---------------------------------------------------------------------
 build/
 install/
 log/
 .colcon/
+COLCON_IGNORE
 
-# Debug output
+# ---------------------------------------------------------------------
+# PyTorch / Ultralytics артефакты
+# ---------------------------------------------------------------------
+runs/
+runs_finetune*/
+weights/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+yolo*.pt
+last.pt
+best.pt
+
+# Кэш Ultralytics
+*.cache
+labels.cache
+images.cache
+
+# WandB / TensorBoard
+wandb/
+tb_logs/
+mlruns/
+lightning_logs/
+
+# ---------------------------------------------------------------------
+# Тяжёлые данные и медиа
+# ---------------------------------------------------------------------
+datasets/
+data/
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Видеофайлы
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.webm
+
+# rosbag
+*.bag
+*.mcap
+*.db3
+rosbag2_*/
+bags/
+
+# Изображения (только в корне и в datasets/, не трогать docs/images и assets/)
 debug_output/
 debug_images/
-runs/
-*.log
 
-# IDE and OS
+# Разрешаем картинки в docs/images/ и assets/
+!docs/images/*.jpg
+!docs/images/*.jpeg
+!docs/images/*.png
+!assets/images/*.jpg
+!assets/images/*.jpeg
+!assets/images/*.png
+!assets/videos/*.mp4
+
+# CSV / JSON отчёты прогонов — храним только описание, не сами отчёты
+# (структура отчётов задана в experiments/results/README.md если нужно)
+
+# ---------------------------------------------------------------------
+# IDE / редакторы
+# ---------------------------------------------------------------------
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 .DS_Store
+Thumbs.db
+desktop.ini
 
-# Secrets
-.env
-private/
-secrets/
+# CLion / PyCharm
+cmake-build-*/
+.idea_modules/
+
+# Vim
+.netrwhist
+Session.vim
+
+# ---------------------------------------------------------------------
+# OS-мусор
+# ---------------------------------------------------------------------
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+ehthumbs_vista.db
+
+# ---------------------------------------------------------------------
+# Локальные конфиги, секреты
+# ---------------------------------------------------------------------
+*.local
+local_settings.py
+.env.local
+.env.*.local
+secrets.yaml

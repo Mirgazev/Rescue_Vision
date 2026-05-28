@@ -1,0 +1,7 @@
+gt_class,pred_NIGHT,pred_FOG,pred_SMOKE,pred_RAIN,pred_OFF,total,accuracy_pct
+NIGHT,276,0,0,10,14,300,92.0
+FOG,0,160,0,1,0,161,99.4
+SMOKE,0,0,147,0,3,150,98.0
+RAIN,14,0,0,116,20,150,77.3
+OFF,15,0,10,0,125,150,83.3
+total,305,160,157,127,162,911,90.5

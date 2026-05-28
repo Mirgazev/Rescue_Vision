@@ -1,0 +1,6 @@
+model,dataset,mode,map50,precision,recall,f1,fps,n_frames
+v4,MCHS_auto_label,OFF,0.995,0.885,1.000,0.939,33.0,339
+v4,MCHS_auto_label,AUTO,0.975,0.872,0.995,0.929,25.6,339
+v4,MCHS_auto_label,NIGHT,0.478,0.532,0.641,0.582,24.0,339
+v4,MCHS_auto_label,FOG,0.460,0.564,0.599,0.581,20.6,339
+v4,MCHS_auto_label,SMOKE,0.288,0.660,0.354,0.461,18.2,339

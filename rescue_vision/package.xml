@@ -1,23 +1,41 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>rescue_vision</name>
-  <version>0.1.0</version>
-  <description>Rescue robot vision pipeline with adaptive enhancement and YOLO11-pose detection.</description>
+  <version>1.0.0</version>
+  <description>Rescue robot vision pipeline: adaptive scene-aware image
+    enhancement + YOLO11-pose + ByteTrack, integrated as a ROS 2 Foxy
+    node. Bachelor thesis at MIREA, 2026.</description>
 
-  <maintainer email="92t89nh84w@privaterelay.appleid.com">Marat Mirgazev</maintainer>
+  <maintainer email="mirgazev.ma@edu.mirea.ru">Marat Mirgazev</maintainer>
+  <author email="mirgazev.ma@edu.mirea.ru">Marat Mirgazev</author>
   <license>MIT</license>
+
+  <url type="repository">https://github.com/Mirgazev/Rescue_Vision</url>
+  <url type="website">https://www.mirea.ru/</url>
 
   <buildtool_depend>ament_python</buildtool_depend>
 
+  <!-- Основные ROS 2 зависимости -->
   <depend>rclpy</depend>
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
+  <depend>vision_msgs</depend>
+  <depend>diagnostic_msgs</depend>
   <depend>cv_bridge</depend>
   <depend>rescue_vision_msgs</depend>
 
-  <exec_depend>python3-opencv</exec_depend>
+  <!-- Опционально для штатного запуска на роботе -->
+  <exec_depend>realsense2_camera</exec_depend>
+  <exec_depend>rosbag2</exec_depend>
+  <exec_depend>rosbag2_storage_default_plugins</exec_depend>
 
+  <!-- Python зависимости (ставятся отдельно через pip, см. requirements.txt) -->
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <!-- Тесты -->
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>

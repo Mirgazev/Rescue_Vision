@@ -1,2 +1,3 @@
-model,dataset,mode,idf1,mota,notes
-YOLO11-pose-v4,MOT17,OFF,0.74,0.77,best tracking result
+model,dataset,mode,idf1,mota,id_switches,fragmentation,n_frames
+v4,MOT17,OFF,0.74,0.77,12,19,5316
+v4,MOT17,AUTO,0.72,0.73,14,22,5316

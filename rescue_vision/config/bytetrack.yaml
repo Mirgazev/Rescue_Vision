@@ -1,0 +1,33 @@
+# =====================================================================
+# bytetrack.yaml — конфигурация трекера ByteTrack
+# =====================================================================
+# Файл совместим с Ultralytics 8.4.x. Передаётся как параметр
+# tracker_config узла rescue_vision_node.
+#
+# Метрики трекинга при этой конфигурации на MOT17 (Таблица 16 ВКР):
+#   IDF1 = 0.74, MOTA = 0.77, IDS = 12, FRAG = 19   (режим OFF)
+#   IDF1 = 0.72, MOTA = 0.73, IDS = 14, FRAG = 22   (режим AUTO)
+#
+# Источник: Zhang Y. et al. "ByteTrack: Multi-Object Tracking by
+# Associating Every Detection Box" // ECCV 2022.
+# =====================================================================
+
+# Тип трекера (Ultralytics поддерживает bytetrack и botsort)
+tracker_type: bytetrack
+
+# Пороги уверенности для двух стадий ассоциации (по статье ByteTrack)
+track_high_thresh: 0.25        # high-confidence detections → first match
+track_low_thresh:  0.10        # low-confidence  detections → second match
+
+# Новый track создаётся, если detection выше этого порога
+new_track_thresh:  0.25
+
+# Длительность буфера треков (в кадрах). Через сколько кадров без
+# совпадения трек считается потерянным.
+track_buffer:      30
+
+# Порог IoU матчинга треков и детекций
+match_thresh:      0.8
+
+# Слияние треков, чьи bbox перекрываются более чем на этот порог
+fuse_score: True

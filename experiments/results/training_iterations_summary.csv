@@ -1,0 +1,6 @@
+version,directory,training_data,epochs,key_changes,exdark_map50,reside_map50,coco_map50,status
+Default,yolo11m-pose,COCO-pretrain Ultralytics,-,base model without fine-tuning,0.7242,0.4403,0.5204,baseline
+v1,exdark_reside_v12,ExDark ~70% + RESIDE ~20% + COCO ~10%,200 (early stop ~29-59),first fine-tuning freeze=10 lr0=0.001 base augmentations,0.8112,0.5827,0.5225,first sustainable improvement
+v2,exdark_fixed,ExDark ~80% + RESIDE/COCO ~20%,137 (stopped manually),hyperparameters fixed AdamW and blur removed amp=True cache=False,0.8725,0.6654,0.5534,stable
+v3,exdark_enhance_aware,same data + RescueEnhancer p=0.5 during training,60,custom trainer patched load_image conflict enhance vs mosaic/mixup,0.7678,0.6265,0.5214,rejected (distribution mismatch)
+v4,exdark_enhance_aware_safe2,safe enhance-aware configuration,25,start from v2 mosaic=0 mixup=0 p=0.25 freeze=22 lr0=1e-4,0.8905,0.6749,0.5646,final

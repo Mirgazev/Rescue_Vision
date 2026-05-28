@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+title: >-
+  Rescue Vision — подсистема технического зрения мобильного
+  спасательного робота
+message: >-
+  Если вы используете этот репозиторий, пожалуйста, ссылайтесь
+  на текст выпускной квалификационной работы.
+type: software
+authors:
+  - given-names: Марат
+    family-names: Миргазев
+    email: mirgazev.ma@edu.mirea.ru
+    affiliation: >-
+      МИРЭА — Российский технологический университет,
+      Институт информационных технологий,
+      кафедра автоматизированных комплексных систем управления
+license: MIT
+repository-code: 'https://github.com/Mirgazev/Rescue_Vision'
+abstract: >-
+  Программное обеспечение подсистемы технического зрения мобильного
+  робота для повышения устойчивости обнаружения людей в условиях
+  ухудшенной видимости. Комбинация эвристического классификатора
+  условий видимости (SceneAnalyzer), набора классических алгоритмов
+  улучшения изображения (RescueEnhancer), дообученного детектора
+  YOLO11-pose и трекера ByteTrack с интеграцией в ROS 2 Foxy.
+keywords:
+  - computer vision
+  - YOLO11-pose
+  - ByteTrack
+  - ROS2
+  - image enhancement
+  - rescue robotics
+  - person detection
+  - low-light
+version: 1.0.0
+date-released: '2026-05-29'
+references:
+  - type: thesis
+    title: >-
+      Программное обеспечение мобильного робота для выполнения
+      спасательных операций
+    authors:
+      - given-names: Марат
+        family-names: Миргазев
+    institution:
+      name: >-
+        МИРЭА — Российский технологический университет
+    thesis-type: >-
+      Выпускная квалификационная работа бакалавра
+    year: 2026
