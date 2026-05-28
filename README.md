@@ -243,3 +243,7 @@ python3 -m rescue_vision.rescue_vision.main \
 ## Лицензия
 
 Исходный код пакетов `rescue_vision` и `rescue_vision_msgs` распространяется по лицензии MIT (см. файл [`LICENSE`](LICENSE)). Веса дообученной модели, текст ВКР и методические указания не входят в это разрешение и принадлежат автору работы и РТУ МИРЭА.
+
+## Контакты
+
+email: marat.mirgazev@mai.ru
