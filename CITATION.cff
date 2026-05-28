@@ -9,11 +9,11 @@ type: software
 authors:
   - given-names: Марат
     family-names: Миргазев
-    email: mirgazev.ma@edu.mirea.ru
+    email: marat.mirgazev@mail.ru
     affiliation: >-
       МИРЭА — Российский технологический университет,
-      Институт информационных технологий,
-      кафедра автоматизированных комплексных систем управления
+      Институт искуственного интеллекта,
+      кафедра проблем управления
 license: MIT
 repository-code: 'https://github.com/Mirgazev/Rescue_Vision'
 abstract: >-
