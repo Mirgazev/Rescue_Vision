@@ -7,12 +7,11 @@
 ```
 docs/images/
 ├── README.md                       (этот файл)
-├── architecture.png                Рис. 14 ВКР — общая архитектура подсистемы
-├── ros2_graph.png                  Рис. 15 ВКР — ROS 2-граф узлов и топиков
-├── enhancement_demo_exdark.png     split-view: оригинал → NIGHT-улучшение
-├── enhancement_demo_reside.png     split-view: оригинал → FOG-улучшение
-├── enhancement_demo_smoke.png      split-view: оригинал → SMOKE-улучшение
-└── mchs_detections.png             кадр из видео МЧС с детекциями + track-ID
+├── enhancement_demo_night.png     split-view: оригинал → NIGHT-улучшение
+├── enhancement_demo_fog.png       split-view: оригинал → FOG-улучшение
+├── enhancement_demo_smoke.png     split-view: оригинал → SMOKE-улучшение
+├── enhancement_demo_rain.png      split-view: оригинал → RAIN-улучшение
+└── mchs_detections.png            кадр из видео МЧС с детекциями + track-ID
 ```
 
 ## Требования к изображениям
